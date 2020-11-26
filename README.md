@@ -1,7 +1,7 @@
-# smart-vortex-ac
+# broadlink-ac-rest-service
 
 # Info
-Web-service that allows to control Vortex smart ac units via a REST protocol.
+Web-service that allows to control Vortex smart ac units via REST.
 
 **WARNING: This is just a prototype project not a final product!**<br>
 Even if the API's work, 
