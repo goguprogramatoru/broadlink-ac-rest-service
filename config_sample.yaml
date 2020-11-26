@@ -1,0 +1,17 @@
+server:
+  port: 9000
+  #0.0.0.0 = bind an all interfaces
+  bind_address: 0.0.0.0
+service:
+  ##This will be used as an authorization bearer token
+  secret = "REPLACE_ME"
+##Devices
+devices:
+- ip: 10.1.2.3
+  mac: "34:EA:AA:AA:AA:AA"
+  name: example1
+  port: 80
+- ip: 10.2.3.4
+  mac: "34:EA:FF:FF:FF:FF"
+  name: example2
+  port: 80
