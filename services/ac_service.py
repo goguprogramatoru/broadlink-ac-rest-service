@@ -1,4 +1,5 @@
 import logging
+import time
 from helpers.config_helper import ConfigHelper
 from helpers.ac_db import Tools as AcDbTools
 
@@ -41,12 +42,20 @@ class AcService:
             self.logger.error("Empty list of devices specified in the config file")
             return
 
-        for device in device_list:
-            device_objects[device['mac']] = AcDbTools().generate_device(
-                devtype=0x4E2a,
-                host=(device['ip'], device['port']),
-                mac=bytearray.fromhex(device['mac'].replace(":", "")),
-                name=device['name']
-            )
+        retry = True
+        while retry == True:
+            for device in device_list:
+                try:
+                    device_objects[device['mac']] = AcDbTools().generate_device(
+                        devtype=0x4E2a,
+                        host=(device['ip'], device['port']),
+                        mac=bytearray.fromhex(device['mac'].replace(":", "")),
+                        name=device['name']
+                    )
+                    retry = False
+                except Exception:
+                    time.sleep(1)
+                    self.logger.warn("Timeout, trying again in 1 sec")
+                    retry = True
 
         return device_objects
